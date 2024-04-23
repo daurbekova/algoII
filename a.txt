@@ -1,0 +1,193 @@
+A. Поиск в BST
+Ограничение времени	1 секунда
+Ограничение памяти	64.0 Мб
+Ввод	стандартный ввод или input.txt
+Вывод	стандартный вывод или output.txt
+Дана верхушка Binary Search Tree (BST) и число(val). Найдите node в BST, где значение(node.val) равно числу(val).
+
+Ограничения:
+
+Количество Nodes в дереве TreeNode в отрезке - [1, 5000]
+1 <= node.val <=10^7
+1 <= val <=10^7
+Формат ввода
+alt-text
+
+4 2 7 1 3
+
+Формат вывода
+2 1 3
+
+Примечания
+Используйте этот подготовленный код и допишите Вашу логику в методе toDo() .так же Вы можете использовать другие языки из списка (документация использования: https://yandex.com/support2/contest/en/examples-stdin-stdout)
+
+import java.io.*;
+import java.util.*;
+
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+    TreeNode() {}
+    TreeNode(int val) { this.val = val; }
+    TreeNode(int val, TreeNode left, TreeNode right) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+public class Main
+{
+    static TreeNode toDo(TreeNode node, int val){
+        // TODO - Тут нужно дописать Ваш код  <<<<<<<<<<<<<<<
+        return null;
+    }
+
+    static void prePrint(TreeNode node, List<Integer> list) {
+        if(node == null) return;
+
+        list.add(node.val);
+        prePrint(node.left, list);
+
+        prePrint(node.right, list);
+    }
+
+    static void print(List<Integer> list) {
+        String str = "";
+        for(int x : list)
+            str += x + " ";
+        System.out.println(str.trim());
+    }
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String terminal = br.readLine();
+        int val = Integer.valueOf(br.readLine());
+
+        TreeNode node = toDo(getTreeTest(terminal, val), val);
+        List<Integer> list = new ArrayList<>();
+        prePrint(node, list);
+        print(list);
+    }
+
+    private static TreeNode getTreeTest(String str, int val) {
+        str = str.trim();
+        if(str.equals("4 2 7 1 3") && val == 2) return treeTest1();
+        else if(str.equals("4 2 7 1 3") && val == 5) return treeTest1();
+        else if(str.equals("4 2 7 1 3 6 8") && val == 4) return treeTest2();
+        return null;
+    }
+
+    private static TreeNode treeTest1() {
+        TreeNode tree = new TreeNode(4);
+        tree.left = new TreeNode(2);
+        tree.right = new TreeNode(7);
+        tree.left.left = new TreeNode(1);
+        tree.left.right = new TreeNode(3);
+        return tree;
+    }
+
+    private static TreeNode treeTest2() {
+        TreeNode tree = new TreeNode(4);
+        tree.left = new TreeNode(2);
+        tree.right = new TreeNode(7);
+        tree.left.left = new TreeNode(1);
+        tree.left.right = new TreeNode(3);
+        tree.right.left = new TreeNode(6);
+        tree.right.right = new TreeNode(8);
+        return tree;
+    }
+}
+_______________________________________________________________________
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+public class TreeNode
+{
+    public int val;
+    public TreeNode left;
+    public TreeNode right;
+
+    public TreeNode(int val = 0, TreeNode left = null, TreeNode right = null)
+    {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+public class Program
+{
+    public static TreeNode ToDo(TreeNode node, int val)
+    {
+        if (node == null || node.val == val)
+            return node;
+        if (node.val < val)
+            return ToDo(node.right, val);
+        return ToDo(node.left, val);
+    }
+
+    public static void PrePrint(TreeNode node, List<int> lst)
+    {
+        if (node == null)
+            return;
+        lst.Add(node.val);
+        PrePrint(node.left, lst);
+        PrePrint(node.right, lst);
+    }
+
+    public static void PrintList(List<int> lst)
+    {
+        Console.WriteLine(string.Join(" ", lst.Select(x => x.ToString())));
+    }
+
+    public static TreeNode GetTreeTest(string s, int val)
+    {
+        s = s.Trim();
+        if (s == "4 2 7 1 3" && val == 2)
+            return TreeTest1();
+        else if (s == "4 2 7 1 3" && val == 5)
+            return TreeTest1();
+        else if (s == "4 2 7 1 3 6 8" && val == 4)
+            return TreeTest2();
+        return null;
+    }
+
+    public static TreeNode TreeTest1()
+    {
+        TreeNode tree = new TreeNode(4);
+        tree.left = new TreeNode(2);
+        tree.right = new TreeNode(7);
+        tree.left.left = new TreeNode(1);
+        tree.left.right = new TreeNode(3);
+        return tree;
+    }
+
+    public static TreeNode TreeTest2()
+    {
+        TreeNode tree = new TreeNode(4);
+        tree.left = new TreeNode(2);
+        tree.right = new TreeNode(7);
+        tree.left.left = new TreeNode(1);
+        tree.left.right = new TreeNode(3);
+        tree.right.left = new TreeNode(6);
+        tree.right.right = new TreeNode(8);
+        return tree;
+    }
+
+    public static void Main(string[] args)
+    {
+        string terminal = Console.ReadLine();
+        int val = int.Parse(Console.ReadLine());
+
+        TreeNode node = ToDo(GetTreeTest(terminal, val), val);
+        if (node != null)
+        {
+            List<int> outputList = new List<int>();
+            PrePrint(node, outputList);
+            PrintList(outputList);
+        }
+    }
+}

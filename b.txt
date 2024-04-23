@@ -1,0 +1,192 @@
+B. тапсырыс
+Ограничение времени	1 секунд
+Ограничение памяти	64,0 Мб
+Ввод	стандартный ввод немесе input.txt
+Вывод	стандартный вывод немесе output.txt
+Дана верхушка бинарного дерева. Вам нужно заполнить List < Integer> значениями из TreeNode (түйін) в порядке - " postorder ".
+
+Ограничения:
+
+Количество Nodes в дерве TreeNode в отрезке - [0, 100]
+-100 <= түйін.вал <=100
+Формат ввод
+балама мәтін
+
+1 2 3 null null 3 4
+
+Формат вывода
+2 3 4 3 1
+
+Мысалы
+Используйте этот подготовленный код и допишите Вашу логику в методе toDo() .так және Другие языки из списка (құжаттарды пайдалану: https://yandex.com/support2/contest/en/examples-stdin-stdout )
+
+import java.io.*;
+import java.util.*;
+
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+    TreeNode() {}
+    TreeNode(int val) { this.val = val; }
+    TreeNode(int val, TreeNode left, TreeNode right) {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+public class Main
+{
+    static void toDo(TreeNode node, List<Integer> list){
+        // TODO - Тут нужно дописать Ваш код  <<<<<<<<<<<<<<<<
+
+    }
+
+    static void print(List<Integer> list) {
+        String output = "";
+        for(int x : list) {
+            output += x + " ";
+        }
+        System.out.print(output.trim());
+    }
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String terminal = br.readLine();
+
+        List<Integer> outputNode = new ArrayList<>();
+        toDo(getTreeTest(terminal), outputNode);
+        print(outputNode);
+    }
+
+    private static TreeNode treeTest1() {
+        TreeNode tree = new TreeNode(1);
+        tree.left = new TreeNode(2);
+        tree.right = new TreeNode(3);
+        tree.right.left = new TreeNode(3);
+        tree.right.right = new TreeNode(4);
+        return tree;
+    }
+
+    private static TreeNode getTreeTest(String str) {
+        switch (str) {
+            case "1 2 3 null null 3 4":
+                return treeTest1();
+            case "1 null 2 3":
+                return treeTest2();
+            case "":
+                return treeTest3();
+            case "1":
+                return treeTest4();
+        }
+        return null;
+    }
+
+    private static TreeNode treeTest2() {
+        TreeNode tree = new TreeNode(1);
+        tree.right = new TreeNode(2);
+        tree.right.left = new TreeNode(3);
+        return tree;
+    }
+
+    private static TreeNode treeTest3() {
+        return null;
+    }
+
+    private static TreeNode treeTest4() {
+        TreeNode tree = new TreeNode(1);
+        return tree;
+    }
+}
+
+_____________________________________________________
+using System;
+using System.Collections.Generic;
+
+public class TreeNode
+{
+    public int val;
+    public TreeNode left;
+    public TreeNode right;
+
+    public TreeNode(int val = 0, TreeNode left = null, TreeNode right = null)
+    {
+        this.val = val;
+        this.left = left;
+        this.right = right;
+    }
+}
+
+public class Program
+{
+    public static void ToDo(TreeNode node, List<int> lst)
+    {
+        if (node == null)
+            return;
+        ToDo(node.left, lst);
+        ToDo(node.right, lst);
+        lst.Add(node.val);
+    }
+
+    public static void PrintList(List<int> lst)
+    {
+        string output = "";
+        foreach (int x in lst)
+        {
+            output += x.ToString() + " ";
+        }
+        Console.WriteLine(output.Trim());
+    }
+
+    public static TreeNode TreeTest1()
+    {
+        TreeNode tree = new TreeNode(1);
+        tree.left = new TreeNode(2);
+        tree.right = new TreeNode(3);
+        tree.right.left = new TreeNode(3);
+        tree.right.right = new TreeNode(4);
+        return tree;
+    }
+
+    public static TreeNode TreeTest2()
+    {
+        TreeNode tree = new TreeNode(1);
+        tree.right = new TreeNode(2);
+        tree.right.left = new TreeNode(3);
+        return tree;
+    }
+
+    public static TreeNode TreeTest3()
+    {
+        return null;
+    }
+
+    public static TreeNode TreeTest4()
+    {
+        return new TreeNode(1);
+    }
+
+    public static TreeNode GetTreeTest(string s)
+    {
+        if (s == "1 2 3 null null 3 4")
+            return TreeTest1();
+        else if (s == "1 null 2 3")
+            return TreeTest2();
+        else if (s == "")
+            return TreeTest3();
+        else if (s == "1")
+            return TreeTest4();
+        else
+            return null;
+    }
+
+    public static void Main(string[] args)
+    {
+        string terminal = Console.ReadLine();
+
+        List<int> outputNode = new List<int>();
+        ToDo(GetTreeTest(terminal), outputNode);
+        PrintList(outputNode);
+    }
+}
